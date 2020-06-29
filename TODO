@@ -1,0 +1,29 @@
+TODO LATER
+☐ Add automatic subtile check in folder (or whats in mkv container)
+☐ Add built-in chromecast support (use cast tab for now same for apple tv)
+
+TODO
+✔ Create video player that works with custom seek time @done(20-06-28 22:04)
+✔ Configure routes folder with express @done(20-06-27 14:36)
+✔ Remove empty folder from directory-tree @done(20-06-27 14:00)
+✔ Use npm directory-tree to diplay folder in web app @done(20-06-27 14:00)
+✔ Streaming function (handle normal mp4 files & unsupported videos with ffmpeg) @done(20-06-27 17:12)
+✔ Setup simple single React page (no need for SSR but use react-router) @done(20-06-27 11:28)
+
+NEED HELP
+☐ mp4 stream transcode with ffmpeg does not work on mobile browser
+
+SETUP
+✔ Run server with nodemone for watch file @done(20-06-27 11:31)
+✔ Create script run for dev and server @done(20-06-27 10:37)
+✔ Install webpack to bundle client code (babel) @done(20-06-27 10:37)
+✔ Add jest to start testing right away (instead of later) @done(20-06-27 09:37)
+✔ Add eslint before starting to code @done(20-06-27 09:24)
+
+RESEARCH (check if project is feasable)
+https://github.com/CouchBuddy/couch-buddy can be a valuable resource
+✔ Find a way to seek video while being transcoded (use seek with req.query to change video time with ffmpeg and seekInput instead of seek) @done(20-06-26 11:10)
+✔ ffmpeg transcode pipe while serving the file (use movflags in ffmpeg options) @done(20-06-26 09:06)
+✔ Fix content-range (player not sending data while seeking) @done(20-06-25 22:15)
+✔ Include ffmpeg with fluent api (start by encoding simple mkv to mp4 and server it with http server) @done(20-06-25 22:09)
+✔ Create server that can server simple MP4 file @done(20-06-25 22:08)
