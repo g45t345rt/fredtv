@@ -4,12 +4,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './routes/home'
 import Player from './routes/player'
+import Metadata from './routes/metadata'
 
 class App extends React.Component {
   render = () => {
     return <BrowserRouter>
       <Switch>
-        <Route path="/player/:path" component={Player} />
+        <Route path="/player/:base64Path" component={Player} />
+        <Route path="/metadata/:base64Path" component={Metadata} />
         <Route path="/" component={Home} />
       </Switch>
     </BrowserRouter>

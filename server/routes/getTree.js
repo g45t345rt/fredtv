@@ -18,7 +18,7 @@ const removeEmptyFolder = (obj, parent) => {
 }
 
 module.exports = (app) => {
-  app.get('/get-tree', (req, res) => {
+  app.get('/api/get-tree', (req, res) => {
     // TEMPORARY
     // TODO: Load config from folder list
     const shareFolder = dirTree('H:\\share', {
@@ -29,9 +29,11 @@ module.exports = (app) => {
       extensions: supported.extensionsRegex
     })
 
-    const data = {}
-    Object.assign(data, shareFolder, moviesFolder)
+    const mFolder = dirTree('G:\\vm_share2', {
+      extensions: supported.extensionsRegex
+    })
 
+    const data = { name: 'root', path: '', children: [moviesFolder, mFolder, shareFolder] }
     removeEmptyFolder(data)
     res.send(data)
   })

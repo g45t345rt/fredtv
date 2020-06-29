@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import TreeData from '../Tree/TreeData'
+import AppVideoTree from '../AppVideoTree'
 
-export default class Video extends React.Component {
+export default class Home extends React.Component {
   render = () => {
     return <div>
-      <div>Home - List of videos</div>
-      <TreeData />
+      <div>Tree Media Center - List of videos</div>
+      <AppVideoTree />
     </div>
   }
 }

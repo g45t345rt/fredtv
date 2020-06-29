@@ -1,6 +1,8 @@
 const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const util = require('util')
+
+const to = require('../../shared/to')
 const { isCodecSupported } = require('../supported')
 
 const ffprobe = util.promisify(ffmpeg.ffprobe)
@@ -67,10 +69,12 @@ const trancodeUnsupportedVideo = (ctx) => {
 }
 
 module.exports = (app) => {
-  app.get('/video', async (req, res) => {
+  app.get('/api/video', async (req, res, next) => {
     const { path } = req.query
 
-    const metadata = await ffprobe(path)
+    const [err, metadata] = await to(ffprobe(path))
+    if (err) return next(err)
+
     const supported = isCodecSupported(metadata)
 
     if (!supported.video || !supported.audio) {

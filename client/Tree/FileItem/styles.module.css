@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+ul.actions {
+  margin: 0;
+  padding: 0;
+}
+
+.actions li {
+  display: inline;
+  margin-left: 5px;
+}

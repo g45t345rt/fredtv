@@ -1,4 +1,4 @@
-video_samples
-node_modules
-ffmpeg
-main.bundle.js
+/ffmpeg
+/node_modules
+/public
+/video_samples
