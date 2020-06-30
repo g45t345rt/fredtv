@@ -1,18 +1,18 @@
 TODO LATER
 ☐ Add automatic subtile check in folder (or whats in mkv container)
 ☐ Add built-in chromecast support (use cast tab for now same for apple tv)
-☐ Preencode function and view later
-☐ Add text input to search specific file from tree (filter tree)
+☐ Feature: Pre-encode function to play video later
+☐ Add text input to search specific file from tree (filter tree & must keep state)
 
 TODO
+✔ Keep tree folder state (state is reset if we change route) @done(20-06-29 22:11)
 ☐ Handle errors of routes (client & server)
+☐ Add json config for media center (folders to check)
 ✔ Use base64 for passing filepath to client app routes @done(20-06-29 18:06)
-☐ Keep tree folder state (state is reset if we change route)
 ✔ Add arrow icon to FolderItem (down when opened, side when closed) @done(20-06-29 16:55)
 ✔ Use css module for styles intead of direct style object @done(20-06-29 16:33)
 ✔ Add folder & file icons in front of tree items @done(20-06-29 16:19)
 ✔ Clickable tree items (hide/show under tree) @done(20-06-29 15:50)
-☐ Add json config for media center (folders to check)
 ✔ Create video player that works with custom seek time @done(20-06-28 22:04)
 ✔ Configure routes folder with express @done(20-06-27 14:36)
 ✔ Remove empty folder from directory-tree @done(20-06-27 14:00)

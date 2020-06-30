@@ -7,13 +7,16 @@ import styles from './styles.module.css'
 
 export default class FileItem extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      path: PropTypes.string.isRequired
+    }),
     fileItemActions: PropTypes.func
   }
 
   render = () => {
-    const { name, path, fileItemActions } = this.props
+    const { data, fileItemActions } = this.props
+    const { name, path } = data
     const base64Path = Base64.encode(path)
     return <div className={styles.container}>
       <FcVideoFile />

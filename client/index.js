@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Home from './routes/home'
+import Home from './routes/Home'
 import Player from './routes/player'
-import Metadata from './routes/metadata'
+import Metadata from './routes/Metadata'
 
 class App extends React.Component {
   render = () => {

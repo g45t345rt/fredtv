@@ -2,9 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Base64 } from 'js-base64'
 
-import state from '../state'
-console.log(state)
-
 export default class Player extends React.Component {
   static propTypes = {
     match: PropTypes.shape({

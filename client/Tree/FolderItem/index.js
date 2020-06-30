@@ -6,10 +6,14 @@ import FileItem from '../FileItem'
 
 export default class FolderItem extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      path: PropTypes.string.isRequired,
+      children: PropTypes.array,
+      collapsed: PropTypes.bool
+    }),
+    onChange: PropTypes.func,
     deep: PropTypes.number,
-    items: PropTypes.array,
     fileItemActions: PropTypes.func
   }
 
@@ -17,12 +21,15 @@ export default class FolderItem extends React.Component {
     deep: 0
   }
 
-  state = {
-    collapsed: false
-  }
+  toggleCollapsed = () => {
+    const { data, onChange } = this.props
 
-  onToggle = () => {
-    this.setState({ collapsed: !this.state.collapsed })
+    if (onChange) {
+      onChange({
+        ...data,
+        collapsed: !data.collapsed
+      })
+    }
   }
 
   getContainerStyle = () => {
@@ -32,10 +39,10 @@ export default class FolderItem extends React.Component {
   }
 
   render = () => {
-    const { name, items } = this.props
-    const { collapsed } = this.state
+    const { data } = this.props
+    const { collapsed, children, name } = data
     return <div style={this.getContainerStyle()}>
-      <div className={styles.container} onClick={this.onToggle}>
+      <div className={styles.container} onClick={this.toggleCollapsed}>
         {!collapsed && <React.Fragment>
           <FcNext />
           <FcFolder />
@@ -46,22 +53,31 @@ export default class FolderItem extends React.Component {
         </React.Fragment>}
         <span className={styles.name}>{name}</span>
       </div>
-      {collapsed && items && items.map((item) => {
+      {collapsed && children && children.map((item) => {
         const { deep, fileItemActions } = this.props
         const isFile = item.children === undefined
         const isFolder = item.children !== undefined
 
         const itemProps = {
-          key: item.path,
-          name: item.name,
-          path: item.path,
-          items: item.children,
+          data: item,
           deep: deep + 1,
           fileItemActions
         }
 
         if (isFile) return <FileItem {...itemProps} />
-        if (isFolder) return <FolderItem {...itemProps} />
+
+        if (isFolder) {
+          return <FolderItem {...itemProps} onChange={(data) => {
+            const { data: parentData, onChange } = this.props
+            parentData.children = parentData.children.map((child) => {
+              if (child.path === data.path) return data
+              return child
+            })
+
+            if (onChange) onChange(parentData)
+          }} />
+        }
+
         return null
       })}
     </div>
