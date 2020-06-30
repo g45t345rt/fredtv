@@ -4,6 +4,7 @@ import ReactJson from 'react-json-view'
 import { Base64 } from 'js-base64'
 import Reflux from 'reflux'
 
+import Loading from '../../Loading'
 import dataStoreFactory from '../dataStoreFactory'
 const DataStoreFactory = dataStoreFactory()
 
@@ -24,9 +25,7 @@ export default class Metadata extends Reflux.Component {
   }
 
   componentDidMount = async () => {
-    const base64Path = this.props.match.params.base64Path
-    const path = Base64.decode(base64Path)
-
+    const path = this.getPath()
     if (this.state.data && this.state.data[path]) return
 
     this.setState({ loading: true })
@@ -44,9 +43,23 @@ export default class Metadata extends Reflux.Component {
     }
   }
 
+  getPath = () => {
+    const base64Path = this.props.match.params.base64Path
+    return Base64.decode(base64Path)
+  }
+
+  getData = () => {
+    const { data } = this.state
+    const path = this.getPath()
+    if (data && data[path]) return data[path]
+    return null
+  }
+
   render = () => {
-    const { data, loading } = this.state
-    if (loading) return <div>loading...</div>
+    const { loading } = this.state
+    if (loading) return <Loading />
+
+    const data = this.getData()
     if (!data) return null
     return <div>
       <ReactJson src={data} />

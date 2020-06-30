@@ -2,9 +2,9 @@ import React from 'react'
 import Reflux from 'reflux'
 import { Link } from 'react-router-dom'
 
-// import HomeStore, { dataUpdate } from './store'
 import dataStoreFactory from '../dataStoreFactory'
 import Tree from '../../Tree'
+import Loading from '../../Loading'
 
 const DataStoreFactory = dataStoreFactory()
 
@@ -29,7 +29,7 @@ export default class Home extends Reflux.Component {
   render = () => {
     const { data, loading } = this.state
 
-    if (loading) return <div>loading...</div>
+    if (loading) return <Loading />
     if (!data) return null
 
     return <div>

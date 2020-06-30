@@ -5,6 +5,8 @@ TODO LATER
 ☐ Add text input to search specific file from tree (filter tree & must keep state)
 
 TODO
+✔ Fix metadata store (must return data matching path not whole data object) @done(20-06-30 08:01)
+✔ Loading icon spinner component @done(20-06-30 07:55)
 ✔ Keep tree folder state (state is reset if we change route) @done(20-06-29 22:11)
 ☐ Handle errors of routes (client & server)
 ☐ Add json config for media center (folders to check)

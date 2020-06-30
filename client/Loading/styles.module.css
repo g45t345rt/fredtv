@@ -1,0 +1,21 @@
+.container { 
+  display: flex;
+  align-items: center;
+}
+
+.loadingText {
+  margin-left: 5px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: rotate 1s linear infinite;
+}
