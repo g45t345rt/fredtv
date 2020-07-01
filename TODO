@@ -1,11 +1,12 @@
 TODO LATER
-☐ Add built-in chromecast support (use cast tab for now same for apple tv)
+
 ☐ Feature: Pre-encode function to play video later
 ☐ Add text input to search specific file from tree (filter tree & must keep state)
 
 TODO
 ☐ Add automatic subtile check in folder (or whats in mkv container)
-☐ Need volume control for player
+☐ Add built-in chromecast support (in the meantime use cast tab)
+✔ Need volume control for player @done(20-07-01 09:43)
 ✔ Create custom video player with custom seek tim (basic is done) @done(20-06-30 23:08)
 ✔ Normalize css @done(20-06-30 21:39)
 ✔ Fix metadata store (must return data matching path not whole data object) @done(20-06-30 08:01)

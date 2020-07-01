@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Base64 } from 'js-base64'
 
-import { FiPlay, FiPause, FiMaximize, FiMinimize } from 'react-icons/fi'
+import { FiPlay, FiPause, FiMaximize, FiMinimize, FiVolume2, FiVolume, FiVolumeX, FiVolume1 } from 'react-icons/fi'
 
 import Loading from '../../Loading'
 import styles from './styles.module.css'
@@ -25,7 +25,10 @@ export default class Player extends React.Component {
     duration: 0,
     playing: false,
     fullscreen: false,
-    supported: false
+    supported: false,
+    volume: 1,
+    lastVolume: 1,
+    muted: false
   }
 
   componentDidMount = async () => {
@@ -47,6 +50,7 @@ export default class Player extends React.Component {
       this.setState({ duration, path, loading: false, supported })
 
       this.player.addEventListener('timeupdate', this.onTimeUpdate)
+      this.player.addEventListener('volumechange', this.onVolumeChange)
     } catch {
       this.setState({ loading: false })
     }
@@ -54,6 +58,7 @@ export default class Player extends React.Component {
 
   componentWillUnmount = () => {
     this.player.removeEventListener('timeupdate', this.onTimeUpdate)
+    this.player.removeEventListener('volumeChange', this.onVolumeChange)
   }
 
   onTimeUpdate = () => {
@@ -61,8 +66,12 @@ export default class Player extends React.Component {
     this.setState({ currentTime: this.player.currentTime + currentTimeOffset })
   }
 
+  onVolumeChange = () => {
+    this.setState({ volume: this.player.volume })
+  }
+
   render = () => {
-    const { loading, duration, currentTime, path, playing, fullscreen, supported } = this.state
+    const { loading, duration, currentTime, path, playing, fullscreen, supported, muted, volume } = this.state
     if (loading) return <Loading />
     if (!path) return null
 
@@ -92,6 +101,21 @@ export default class Player extends React.Component {
             <FileNameControl path={path} />
             <TimeControl currentTime={currentTime} />
           </ProgressBarControl>
+          <VolumeControl muted={muted} volume={volume} onToggle={() => {
+            if (muted) {
+              this.player.volume = this.state.lastVolume
+              this.player.muted = false
+              this.setState({ muted: false })
+            } else {
+              this.setState({ lastVolume: volume })
+              this.player.volume = 0
+              this.player.muted = true
+              this.setState({ muted: true })
+            }
+          }} onSeek={(seek) => {
+            this.player.volume = seek
+            this.setState({ lastVolume: seek })
+          }} />
           <FullscreenControl fullscreen={fullscreen} onToggle={() => {
             if (!fullscreen) {
               try {
@@ -143,7 +167,7 @@ ProgressBarControl.propTypes = {
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   onSeek: PropTypes.func,
-  children: PropTypes.element
+  children: PropTypes.arrayOf(PropTypes.element)
 }
 
 const FullscreenControl = ({ fullscreen, onToggle }) => {
@@ -188,4 +212,44 @@ const FileNameControl = ({ path }) => {
 
 FileNameControl.propTypes = {
   path: PropTypes.string.isRequired
+}
+
+const VolumeControl = ({ volume, muted, onToggle, onSeek }) => {
+  let icon = <FiVolume2 />
+  if (volume < 0.5) icon = <FiVolume1 />
+  if (volume < 0.1) icon = <FiVolume />
+  if (muted) icon = <FiVolumeX />
+
+  const height = volume * 100
+
+  return <div className={styles.volume}>
+    <div onClick={onToggle} onMouseOver={() => {
+      const seekContainer = document.getElementById('seekContainer')
+      seekContainer.style.display = 'flex'
+    }}>{icon}</div>
+    <div className={styles.mouseGapFill}></div>
+    <div id="seekContainer" style={{ display: 'none' }} className={styles.seekContainer} onMouseOut={(e) => {
+      const seekContainer = document.getElementById('seekContainer')
+      if (seekContainer.contains(e.relatedTarget)) return
+      seekContainer.style.display = 'none'
+    }}>
+      <div id="seekBar" className={styles.seekBar} onClick={(e) => {
+        const seekBar = document.getElementById('seekBar')
+        const rect = seekBar.getBoundingClientRect()
+        // substract by rect.height to reverse values and use abs to remove negative sign
+        const y = Math.abs(e.clientY - rect.y - rect.height)
+        const seek = (y * 1) / rect.height // format to percentage between 0-1
+        if (onSeek) onSeek(seek)
+      }}>
+        <div className={styles.slider} style={{ height: `${height}%` }}></div>
+      </div>
+    </div>
+  </div>
+}
+
+VolumeControl.propTypes = {
+  volume: PropTypes.number.isRequired,
+  muted: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func,
+  onSeek: PropTypes.func
 }
