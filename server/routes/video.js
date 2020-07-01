@@ -3,7 +3,7 @@ const fs = require('fs')
 const util = require('util')
 
 const to = require('../../shared/to')
-const { isCodecSupported } = require('../supported')
+const { isCodecSupported } = require('../../shared/supported')
 
 const ffprobe = util.promisify(ffmpeg.ffprobe)
 

@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './routes/Home'
-import Player from './routes/player'
+import Player from './routes/Player'
 import Metadata from './routes/Metadata'
+
+import 'normalize.css'
 
 class App extends React.Component {
   render = () => {

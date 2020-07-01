@@ -2,7 +2,7 @@ import React from 'react'
 import Reflux from 'reflux'
 import { Link } from 'react-router-dom'
 
-import dataStoreFactory from '../dataStoreFactory'
+import dataStoreFactory from '../../dataStoreFactory'
 import Tree from '../../Tree'
 import Loading from '../../Loading'
 

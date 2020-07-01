@@ -5,7 +5,7 @@ import { Base64 } from 'js-base64'
 import Reflux from 'reflux'
 
 import Loading from '../../Loading'
-import dataStoreFactory from '../dataStoreFactory'
+import dataStoreFactory from '../../dataStoreFactory'
 const DataStoreFactory = dataStoreFactory()
 
 export default class Metadata extends Reflux.Component {

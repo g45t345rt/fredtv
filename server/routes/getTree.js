@@ -1,5 +1,5 @@
 const dirTree = require('directory-tree')
-const supported = require('../supported')
+const supported = require('../../shared/supported')
 
 const removeEmptyFolder = (obj, parent) => {
   const { children, name } = obj
