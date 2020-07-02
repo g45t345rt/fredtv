@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import dataStoreFactory from '../../dataStoreFactory'
 import Tree from '../../Tree'
-import Loading from '../../Loading'
+import PageLoading from '../../PageLoading'
 
 const DataStoreFactory = dataStoreFactory()
 
@@ -29,18 +29,16 @@ export default class Home extends Reflux.Component {
   render = () => {
     const { data, loading } = this.state
 
-    if (loading) return <Loading />
-    if (!data) return null
-
     return <div>
-      <Tree
+      <PageLoading loading={loading} />
+      {data && <Tree
         data={data}
         onChange={(data) => DataStoreFactory.dataUpdate(data)}
         fileItemActions={({ path, base64Path }) => [
-          <Link key="play_with_player" to={`/player/${base64Path}`}>player</Link>,
+          <Link key="play_with_player" to={`/video/${base64Path}`}>play</Link>,
           <a key="play_file" target="_blank" rel="noreferrer" href={`/api/video?path=${path}`}>file</a>,
           <Link key="view_file_info" to={`/metadata/${base64Path}`}>metadata</Link>
-        ]} />
+        ]} />}
     </div>
   }
 }

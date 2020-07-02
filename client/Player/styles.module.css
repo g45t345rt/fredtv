@@ -114,3 +114,22 @@
   text-overflow: ellipsis;
   max-width: 80%;
 }
+
+.bigPlay {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  height: 100%;
+  font-size: 50px;
+  align-items: center;
+}
+
+.bigPlay .button {
+  cursor: pointer;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, .9);
+  border-radius: 50%;
+  line-height: 0;
+}

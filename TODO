@@ -6,6 +6,9 @@ TODO LATER
 TODO
 ☐ Add automatic subtile check in folder (or whats in mkv container)
 ☐ Add built-in chromecast support (in the meantime use cast tab)
+✔ Create reusable video player component before doing anything else (organine/divide the code) @done(20-07-02 10:04)
+✔ Hide controls after mouse inactivity @done(20-07-02 08:45)
+✔ Fullscreen play/pause big center button @done(20-07-01 18:40)
 ✔ Need volume control for player @done(20-07-01 09:43)
 ✔ Create custom video player with custom seek tim (basic is done) @done(20-06-30 23:08)
 ✔ Normalize css @done(20-06-30 21:39)

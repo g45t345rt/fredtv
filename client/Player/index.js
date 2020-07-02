@@ -1,25 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Base64 } from 'js-base64'
 
-import { FiPlay, FiPause, FiMaximize, FiMinimize, FiVolume2, FiVolume, FiVolumeX, FiVolume1 } from 'react-icons/fi'
-
-import Loading from '../../Loading'
 import styles from './styles.module.css'
-import supported, { isCodecSupported } from '../../../shared/supported'
+import { isCodecSupported } from '../../shared/supported'
+import Loading from './Loading'
 
+import { BigPlayControl, FileNameControl, FullscreenControl, PlayControl, ProgressBarControl, TimeControl, VolumeControl } from './Controls'
+
+let inactivityTimeout = null
 export default class Player extends React.Component {
   static propTypes = {
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        base64Path: PropTypes.string.isRequired
-      })
-    })
+    path: PropTypes.string.isRequired
   }
 
   state = {
     loading: false,
-    path: null,
     currentTime: 0,
     currentTimeOffset: 0,
     duration: 0,
@@ -28,12 +23,12 @@ export default class Player extends React.Component {
     supported: false,
     volume: 1,
     lastVolume: 1,
-    muted: false
+    muted: false,
+    inactive: false
   }
 
   componentDidMount = async () => {
-    const base64Path = this.props.match.params.base64Path
-    const path = Base64.decode(base64Path)
+    const { path } = this.props
 
     try {
       this.setState({ loading: true })
@@ -70,23 +65,36 @@ export default class Player extends React.Component {
     this.setState({ volume: this.player.volume })
   }
 
-  render = () => {
-    const { loading, duration, currentTime, path, playing, fullscreen, supported, muted, volume } = this.state
-    if (loading) return <Loading />
-    if (!path) return null
+  togglePlay = () => {
+    const { playing } = this.state
+    if (playing) this.player.pause()
+    if (!playing) this.player.play()
 
-    return <div ref={(node) => (this.parent = node)}>
+    this.setState({ playing: !playing })
+  }
+
+  render = () => {
+    const { path } = this.props
+    const { loading, duration, currentTime, playing, fullscreen, supported, muted, volume, inactive } = this.state
+    if (loading) return <Loading />
+    return <div ref={(node) => (this.parent = node)} onMouseMove={() => {
+      if (inactivityTimeout) clearTimeout(inactivityTimeout)
+
+      this.parent.style.cursor = 'default'
+      this.setState({ inactive: false })
+
+      inactivityTimeout = setTimeout(() => {
+        this.parent.style.cursor = 'none'
+        this.setState({ inactive: true })
+      }, 5000)
+    }}>
       <video ref={(node) => (this.player = node)} className={styles.video}>
         <source src={`/api/video?path=${path}`} type="video/mp4" />
       </video>
-      <div className={styles.controls}>
+      <BigPlayControl playing={playing} onToggle={this.togglePlay} inactive={inactive} />
+      {!inactive && <div className={styles.controls}>
         <div className={styles.container}>
-          <PlayControl playing={playing} onToggle={() => {
-            if (playing) this.player.pause()
-            if (!playing) this.player.play()
-
-            this.setState({ playing: !playing })
-          }} />
+          <PlayControl playing={playing} onToggle={this.togglePlay} />
           <ProgressBarControl currentTime={currentTime} duration={duration} onSeek={(seek) => {
             const newTime = (seek * duration) / 100
 
@@ -130,11 +138,12 @@ export default class Player extends React.Component {
             }
           }} />
         </div>
-      </div>
+      </div>}
     </div>
   }
 }
 
+/*
 const PlayControl = ({ playing, onToggle }) => {
   let icon = <FiPlay />
   if (playing) icon = <FiPause />
@@ -253,3 +262,21 @@ VolumeControl.propTypes = {
   onToggle: PropTypes.func,
   onSeek: PropTypes.func
 }
+
+const BigPlay = ({ playing, onToggle, inactive }) => {
+  let icon = <FiPlayCircle />
+  if (playing) icon = <FiPauseCircle />
+
+  if (inactive) return null
+  return <div className={styles.bigPlay}>
+    <div id="bigPlay" className={styles.button} onClick={onToggle}>{icon}</div>
+  </div>
+}
+
+BigPlay.propTypes = {
+  playing: PropTypes.bool.isRequired,
+  inactive: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func
+}
+
+*/

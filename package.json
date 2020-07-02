@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chromecast-api": "^0.3.3",
     "directory-tree": "^2.2.4",
     "express": "^4.17.1",
     "fluent-ffmpeg": "^2.1.2",

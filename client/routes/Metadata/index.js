@@ -4,7 +4,7 @@ import ReactJson from 'react-json-view'
 import { Base64 } from 'js-base64'
 import Reflux from 'reflux'
 
-import Loading from '../../Loading'
+import PageLoading from '../../PageLoading'
 import dataStoreFactory from '../../dataStoreFactory'
 const DataStoreFactory = dataStoreFactory()
 
@@ -57,12 +57,10 @@ export default class Metadata extends Reflux.Component {
 
   render = () => {
     const { loading } = this.state
-    if (loading) return <Loading />
-
     const data = this.getData()
-    if (!data) return null
     return <div>
-      <ReactJson src={data} />
+      <PageLoading loading={loading} />
+      {data && <ReactJson src={data} />}
     </div>
   }
 }
