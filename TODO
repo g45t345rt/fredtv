@@ -1,11 +1,12 @@
 TODO LATER
-
 ☐ Feature: Pre-encode function to play video later
 ☐ Add text input to search specific file from tree (filter tree & must keep state)
 
 TODO
 ☐ Add automatic subtile check in folder (or whats in mkv container)
-☐ Add built-in chromecast support (in the meantime use cast tab)
+☐ Video subtitle component (display subtitle onscreen as well as choosing between available subtitles)
+☐ Include new playbackSpeed video control (slider)
+✔ Add built-in chromecast support (in the meantime use cast tab) @done(20-07-05 20:51)
 ✔ Create reusable video player component before doing anything else (organine/divide the code) @done(20-07-02 10:04)
 ✔ Hide controls after mouse inactivity @done(20-07-02 08:45)
 ✔ Fullscreen play/pause big center button @done(20-07-01 18:40)

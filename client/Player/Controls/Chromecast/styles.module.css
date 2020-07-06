@@ -1,0 +1,54 @@
+.container {
+  line-height: 0;
+  margin-right: 15px;
+}
+
+.container .icon {
+  cursor: pointer;
+}
+
+.container .icon.casting {
+  color: #1b8bff;
+}
+
+.devices {
+  max-width: 200px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .9);
+  position: fixed;
+  border-radius: 5px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  background-color: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.items > div {
+  padding: 10px;
+  line-height: initial;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.items > div > * {
+  margin-right: 10px;
+}

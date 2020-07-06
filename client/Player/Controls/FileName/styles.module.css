@@ -8,4 +8,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 80%;
+    user-select: none;
 }

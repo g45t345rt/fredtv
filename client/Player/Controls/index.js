@@ -5,6 +5,7 @@ import PlayControl from './Play'
 import TimeControl from './Time'
 import VolumeControl from './Volume'
 import ProgressBarControl from './ProgressBar'
+import ChromecastControl from './Chromecast'
 
 export {
   BigPlayControl,
@@ -13,5 +14,6 @@ export {
   PlayControl,
   TimeControl,
   VolumeControl,
-  ProgressBarControl
+  ProgressBarControl,
+  ChromecastControl
 }

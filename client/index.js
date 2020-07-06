@@ -8,15 +8,21 @@ import Metadata from './routes/Metadata'
 
 import 'normalize.css'
 
+const AppStyle = {
+  fontFamily: 'monospace'
+}
+
 class App extends React.Component {
   render = () => {
-    return <BrowserRouter>
-      <Switch>
-        <Route path="/video/:base64Path" component={Video} />
-        <Route path="/metadata/:base64Path" component={Metadata} />
-        <Route path="/" component={Home} />
-      </Switch>
-    </BrowserRouter>
+    return <div style={AppStyle}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/video/:base64Path" component={Video} />
+          <Route path="/metadata/:base64Path" component={Metadata} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   }
 }
 

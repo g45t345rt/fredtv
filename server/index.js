@@ -1,16 +1,19 @@
 const express = require('express')
 const path = require('path')
-const app = express()
+
 const ffmpeg = require('fluent-ffmpeg')
+const expressWebsocket = require('express-ws')
+
+const template = require('./template')
+const setRoutes = require('./setRoutes')
 
 const ffmpegPath = path.resolve('./ffmpeg/ffmpeg.exe')
 ffmpeg.setFfmpegPath(ffmpegPath)
 const ffprobePath = path.resolve('./ffmpeg/ffprobe.exe')
 ffmpeg.setFfprobePath(ffprobePath)
 
-const template = require('./template')
-const setRoutes = require('./setRoutes')
-
+const app = express()
+expressWebsocket(app)
 const PORT = 8888
 
 app.use(express.static(path.resolve('./public')))
