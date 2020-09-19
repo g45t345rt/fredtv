@@ -4,10 +4,8 @@ You can play supported and unsupported files right away.
 The ffmpeg lib will encode videos on the fly and stream back through http request.
 
 ##### Screenshots
-  Folder tree
-  ![folder tree](https://github.com/g45t345rt/fredtv/blob/master/readme_images/folder_tree_300.jpg?raw=true)
-  Player
-  ![video player](https://github.com/g45t345rt/fredtv/blob/master/readme_images/folder_tree_300.jpg?raw=true)
+![folder tree](https://github.com/g45t345rt/fredtv/blob/master/readme_images/folder_tree_300.jpg?raw=true)
+![video player](https://github.com/g45t345rt/fredtv/blob/master/readme_images/player_300.jpg?raw=true)
 
 ##### Features
 - Expandable file tree viewer 
