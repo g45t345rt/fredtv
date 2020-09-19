@@ -1,11 +1,16 @@
-TODO LATER
+MAYBE
 ☐ Feature: Pre-encode function to play video later
 ☐ Add text input to search specific file from tree (filter tree & must keep state)
+☐ Handle errors of routes (client & server)
+☐ Settings page that modidy config file with UI
+☐ Include new playbackSpeed video control (slider)
+☐ Fix performance: Tree viewer render is slow if there is a lot of files (use react-virtualized-tree)
 
 TODO
+☐ Add multiple audio selector (mkv container)
 ☐ Add automatic subtile check in folder (or whats in mkv container)
 ☐ Video subtitle component (display subtitle onscreen as well as choosing between available subtitles)
-☐ Include new playbackSpeed video control (slider)
+✔ Add json config for media center (list of folders to check for videos) @done(20-09-18 20:55)
 ✔ Add built-in chromecast support (in the meantime use cast tab) @done(20-07-05 20:51)
 ✔ Create reusable video player component before doing anything else (organine/divide the code) @done(20-07-02 10:04)
 ✔ Hide controls after mouse inactivity @done(20-07-02 08:45)
@@ -16,9 +21,6 @@ TODO
 ✔ Fix metadata store (must return data matching path not whole data object) @done(20-06-30 08:01)
 ✔ Loading icon spinner component @done(20-06-30 07:55)
 ✔ Keep tree folder state (state is reset if we change route) @done(20-06-29 22:11)
-☐ Handle errors of routes (client & server)
-☐ Settings page that modidy config file with UI
-☐ Add json config for media center (list of folders to check for videos)
 ✔ Use base64 for passing filepath to client app routes @done(20-06-29 18:06)
 ✔ Add arrow icon to FolderItem (down when opened, side when closed) @done(20-06-29 16:55)
 ✔ Use css module for styles intead of direct style object @done(20-06-29 16:33)

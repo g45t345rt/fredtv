@@ -40,6 +40,7 @@ export default class Player extends React.Component {
       await this.loadMetadata()
       this.setState({ loading: false })
 
+      document.addEventListener('mousemove', this.handleInactivity)
       this.player.addEventListener('timeupdate', this.onTimeUpdate)
       this.registerCast()
     } catch {
@@ -48,6 +49,8 @@ export default class Player extends React.Component {
   }
 
   componentWillUnmount = () => {
+    if (this.inactivityTimeout) clearTimeout(this.inactivityTimeout)
+    document.removeEventListener('mousemove', this.handleInactivity)
     this.player.removeEventListener('timeupdate', this.onTimeUpdate)
   }
 
@@ -164,14 +167,17 @@ export default class Player extends React.Component {
   handleInactivity = () => {
     if (this.inactivityTimeout) clearTimeout(this.inactivityTimeout)
 
-    this.parent.style.cursor = 'default'
-    this.setState({ inactive: false })
-
-    this.inactivityTimeout = setTimeout(() => {
-      if (!this.state.playing) return // Don't hide on pause
-      this.parent.style.cursor = 'none'
-      this.setState({ inactive: true })
-    }, 5000)
+    const { inactive } = this.state
+    if (inactive) {
+      this.parent.style.cursor = 'default'
+      this.setState({ inactive: false })
+    } else {
+      this.inactivityTimeout = setTimeout(() => {
+        if (!this.state.playing) return // Don't hide on pause
+        this.parent.style.cursor = 'none'
+        this.setState({ inactive: true })
+      }, 5000)
+    }
   }
 
   toggleVolume = () => {
@@ -250,7 +256,7 @@ export default class Player extends React.Component {
     const { path } = this.props
     const { loading, duration, currentTime, playing, fullscreen, muted, volume, inactive, showCast, castingDevice } = this.state
     if (loading) return <Loading />
-    return <div ref={(node) => (this.parent = node)} onMouseMove={this.handleInactivity}>
+    return <div ref={(node) => (this.parent = node)}>
       <video ref={(node) => (this.player = node)} className={styles.video}>
         <source src={this.getVideoUrl()} type="video/mp4" />
       </video>

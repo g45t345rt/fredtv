@@ -1,7 +1,10 @@
 const dirTree = require('directory-tree')
+
+const getConfig = require('../getConfig')
 const supported = require('../../shared/supported')
 
 const removeEmptyFolder = (obj, parent) => {
+  if (obj) return
   const { children, name } = obj
   if (children) {
     let i = children.length
@@ -21,19 +24,15 @@ module.exports = (app) => {
   app.get('/api/get-tree', (req, res) => {
     // TEMPORARY
     // TODO: Load config from folder list
-    const shareFolder = dirTree('H:\\share', {
-      extensions: supported.extensionsRegex
+
+    const tree = []
+    const config = getConfig()
+    const { folders = [] } = config
+    folders.forEach((folderPath) => {
+      tree.push(dirTree(folderPath, supported.extensionsRegex))
     })
 
-    const moviesFolder = dirTree('G:\\movies', {
-      extensions: supported.extensionsRegex
-    })
-
-    const mFolder = dirTree('G:\\vm_share2', {
-      extensions: supported.extensionsRegex
-    })
-
-    const data = { name: 'root', path: '', children: [moviesFolder, mFolder, shareFolder] }
+    const data = { name: 'root', path: '', children: tree }
     removeEmptyFolder(data)
     res.send(data)
   })

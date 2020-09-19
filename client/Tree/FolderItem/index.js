@@ -54,11 +54,13 @@ export default class FolderItem extends React.Component {
         <span className={styles.name}>{name}</span>
       </div>
       {collapsed && children && children.map((item) => {
+        if (!item) return
         const { deep, fileItemActions } = this.props
         const isFile = item.children === undefined
         const isFolder = item.children !== undefined
 
         const itemProps = {
+          key: item.path,
           data: item,
           deep: deep + 1,
           fileItemActions

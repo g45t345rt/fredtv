@@ -2,7 +2,7 @@
 const extensionsRegex = /\.(mp4|mkv|avi)/
 const extensions = ['mp4', 'mkv', 'avi']
 const codecs = {
-  audio: ['aac', 'ac3', 'mp3', 'vorbis', 'opus'],
+  audio: ['aac', 'mp3', 'vorbis', 'opus'],
   video: ['h264', 'vp8', 'vp9']
 }
 
