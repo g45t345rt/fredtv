@@ -22,9 +22,6 @@ const removeEmptyFolder = (obj, parent) => {
 
 module.exports = (app) => {
   app.get('/api/get-tree', (req, res) => {
-    // TEMPORARY
-    // TODO: Load config from folder list
-
     const tree = []
     const config = getConfig()
     const { folders = [] } = config

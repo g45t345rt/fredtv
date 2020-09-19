@@ -10,6 +10,7 @@ TODO
 ☐ Add multiple audio selector (mkv container)
 ☐ Add automatic subtile check in folder (or whats in mkv container)
 ☐ Video subtitle component (display subtitle onscreen as well as choosing between available subtitles)
+✔ Complete readme file @done(20-09-19 19:44)
 ✔ Add json config for media center (list of folders to check for videos) @done(20-09-18 20:55)
 ✔ Add built-in chromecast support (in the meantime use cast tab) @done(20-07-05 20:51)
 ✔ Create reusable video player component before doing anything else (organine/divide the code) @done(20-07-02 10:04)

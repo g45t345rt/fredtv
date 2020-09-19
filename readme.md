@@ -1,5 +1,31 @@
-#### One Damn Simple Media Center
-Assign folders with videos. The app will filter and display all videos in folder tree. You can play supported and unsupported files right away. ffmpeg will encode videos on the fly and pipe through http request.
+#### FredTV - Simple Node media server
+It will filter and display all videos of assigned folders.
+You can play supported and unsupported files right away. 
+The ffmpeg lib will encode videos on the fly and stream back through http request.
 
-Custom video player with seek functionnality for encoded videos.
-You can access file metadata, player viewer and direct file access.
+##### Screenshots
+  Folder tree
+  ![folder tree](https://github.com/g45t345rt/fredtv/blob/master/readme_images/folder_tree_300.jpg?raw=true)
+  Player
+  ![video player](https://github.com/g45t345rt/fredtv/blob/master/readme_images/folder_tree_300.jpg?raw=true)
+
+##### Features
+- Expandable file tree viewer 
+- Custom video player that works with unsupported videos
+- Access file metadata
+- Chromecast support
+
+##### Assigned folders with config.json
+  ![config file](https://github.com/g45t345rt/fredtv/blob/master/readme_images/config.jpg?raw=true)
+
+##### Development
+Clone repository
+
+Open 1st terminal
+`npm run dev-client` -> Watch and bundle clien side code with webpack
+
+Open 2nd terminal
+`npm run dev-server` -> Run server with nodemon
+
+##### Build production & release
+TODO
