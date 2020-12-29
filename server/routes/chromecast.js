@@ -52,6 +52,11 @@ module.exports = (app) => {
     client.devices.forEach((device) => registerDevice(ws, device))
     client.on('device', (device) => registerDevice(ws, device))
 
+    ws.on('close', () => {
+      client.devices.forEach((device) => device.removeAllListeners())
+      client.removeAllListeners('device')
+    })
+
     ws.on('message', (msg) => {
       const cmd = JSON.parse(msg)
       if (!validCastCMDTypes(cmd.type)) return
